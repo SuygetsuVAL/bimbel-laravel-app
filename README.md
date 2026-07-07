@@ -1,14 +1,27 @@
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:004ac6,100:38bdf8&height=200&section=header&text=AozoraLearn&fontSize=70&fontColor=ffffff&animation=fadeIn&fontAlignY=38&desc=Sistem%20Manajemen%20Bimbingan%20Belajar%20Berbasis%20Web&descAlignY=60&descSize=18" width="100%"/>
+
 <div align="center">
 
-# 📚 AozoraLearn
+<a href="https://github.com/SuygetsuVAL/bimbel-laravel-app">
+  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=22&pause=1000&color=004AC6&center=true&vCenter=true&width=600&lines=📚+Sistem+Manajemen+Bimbel+Modern;🚀+Dibangun+dengan+Laravel+13;👑+Portal+Admin+%26+Tutor+Terintegrasi;📊+Laporan+Excel+%26+Chart.js;✅+6+Tests+Passed+%E2%80%94+Siap+Produksi!" alt="Typing SVG" />
+</a>
 
-### Sistem Manajemen Bimbingan Belajar Berbasis Web
+<br/>
+<br/>
 
 [![Laravel](https://img.shields.io/badge/Laravel-13.x-FF2D20?style=for-the-badge&logo=laravel&logoColor=white)](https://laravel.com)
 [![PHP](https://img.shields.io/badge/PHP-8.3+-777BB4?style=for-the-badge&logo=php&logoColor=white)](https://php.net)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-CDN-06B6D4?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com)
 [![MySQL](https://img.shields.io/badge/MySQL-8.0-4479A1?style=for-the-badge&logo=mysql&logoColor=white)](https://mysql.com)
-[![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)](LICENSE)
+[![License](https://img.shields.io/badge/License-MIT-22c55e?style=for-the-badge)](LICENSE)
+
+<br/>
+
+![Profile Views](https://komarev.com/ghpvc/?username=SuygetsuVAL&label=Repo+Views&color=004ac6&style=flat-square)
+[![GitHub stars](https://img.shields.io/github/stars/SuygetsuVAL/bimbel-laravel-app?style=social)](https://github.com/SuygetsuVAL/bimbel-laravel-app/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/SuygetsuVAL/bimbel-laravel-app?style=social)](https://github.com/SuygetsuVAL/bimbel-laravel-app/network)
+
+<br/>
 
 > **AozoraLearn** adalah aplikasi manajemen bimbingan belajar (*bimbel*) yang dibangun dengan **Laravel 13**. Dirancang untuk mengelola seluruh operasional lembaga bimbel — mulai dari data siswa, jadwal mengajar, presensi, nilai, hingga pembayaran SPP — dalam satu platform terpadu.
 
@@ -47,6 +60,19 @@
 ---
 
 ## 🛠️ Tech Stack
+
+<div align="center">
+
+![PHP](https://img.shields.io/badge/PHP-777BB4?style=for-the-badge&logo=php&logoColor=white)
+![Laravel](https://img.shields.io/badge/Laravel-FF2D20?style=for-the-badge&logo=laravel&logoColor=white)
+![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=mysql&logoColor=white)
+![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS-06B6D4?style=for-the-badge&logo=tailwind-css&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
+![Chart.js](https://img.shields.io/badge/Chart.js-FF6384?style=for-the-badge&logo=chartdotjs&logoColor=white)
+![Git](https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white)
+![Laragon](https://img.shields.io/badge/Laragon-0E83CD?style=for-the-badge&logo=laragon&logoColor=white)
+
+</div>
 
 | Layer | Teknologi |
 |---|---|
@@ -247,10 +273,20 @@ Proyek ini dilisensikan di bawah **MIT License** — lihat file [LICENSE](LICENS
 
 ---
 
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:38bdf8,100:004ac6&height=120&section=footer&animation=fadeIn" width="100%"/>
+
 <div align="center">
 
-Dibuat dengan ❤️ menggunakan **Laravel 13** & **Tailwind CSS**
+Dibuat dengan ❤️ oleh <a href="https://github.com/SuygetsuVAL"><b>SuygetsuVAL</b></a> menggunakan <b>Laravel 13</b> & <b>Tailwind CSS</b>
+
+<br/>
 
 ⭐ **Jangan lupa beri bintang jika proyek ini bermanfaat!** ⭐
+
+<br/>
+
+<a href="https://github.com/SuygetsuVAL/bimbel-laravel-app">
+  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=14&pause=2000&color=004AC6&center=true&vCenter=true&width=400&lines=Thanks+for+visiting!+⭐;Star+the+repo+if+you+like+it!+🚀" alt="Footer Typing" />
+</a>
 
 </div>
