@@ -2,11 +2,6 @@
 
 <div align="center">
 
-<a href="https://github.com/SuygetsuVAL/bimbel-laravel-app">
-  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=22&pause=1000&color=004AC6&center=true&vCenter=true&width=600&lines=📚+Sistem+Manajemen+Bimbel+Modern;🚀+Dibangun+dengan+Laravel+13;👑+Portal+Admin+%26+Tutor+Terintegrasi;📊+Laporan+Excel+%26+Chart.js;✅+6+Tests+Passed+%E2%80%94+Siap+Produksi!" alt="Typing SVG" />
-</a>
-
-<br/>
 <br/>
 
 [![Laravel](https://img.shields.io/badge/Laravel-13.x-FF2D20?style=for-the-badge&logo=laravel&logoColor=white)](https://laravel.com)
@@ -277,16 +272,14 @@ Proyek ini dilisensikan di bawah **MIT License** — lihat file [LICENSE](LICENS
 
 <div align="center">
 
-Dibuat dengan ❤️ oleh <a href="https://github.com/SuygetsuVAL"><b>SuygetsuVAL</b></a> menggunakan <b>Laravel 13</b> & <b>Tailwind CSS</b>
+Dibuat dengan ❤️ oleh tim yang terdiri dari
+<a href="https://github.com/SuygetsuVAL"><b>Wan Nur Habibi</b></a>,
+<a href="https://github.com/yahya-muharja"><b>Yahya Muharja</b></a>, dan
+<a href="https://github.com/putraa-jo"><b>M. Putra</b></a>
+— menggunakan <b>Laravel 13</b> & <b>Tailwind CSS</b>
 
 <br/>
 
 ⭐ **Jangan lupa beri bintang jika proyek ini bermanfaat!** ⭐
-
-<br/>
-
-<a href="https://github.com/SuygetsuVAL/bimbel-laravel-app">
-  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=14&pause=2000&color=004AC6&center=true&vCenter=true&width=400&lines=Thanks+for+visiting!+⭐;Star+the+repo+if+you+like+it!+🚀" alt="Footer Typing" />
-</a>
 
 </div>
