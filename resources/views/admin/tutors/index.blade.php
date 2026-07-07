@@ -16,6 +16,58 @@
     </div>
 </div>
 
+{{-- Flash: Info akun tutor baru --}}
+@if(session('success') && str_contains(session('success'), 'Akun login:'))
+    @php
+        // Parse "Tutor berhasil ditambahkan. Akun login: desi@aozoralearn.id / tutor123"
+        preg_match('/Akun login:\s*(\S+)\s*\/\s*(\S+)/', session('success'), $m);
+        $newEmail    = $m[1] ?? '';
+        $newPassword = $m[2] ?? '';
+    @endphp
+    <div class="mb-6 p-5 bg-gradient-to-r from-green-50 to-emerald-50 border-2 border-green-300 rounded-xl" id="accountInfoBox">
+        <div class="flex items-start gap-3">
+            <span class="material-symbols-outlined text-green-600 text-[28px] mt-0.5" style="font-variation-settings:'FILL' 1;">check_circle</span>
+            <div class="flex-1">
+                <p class="font-bold text-green-800 text-sm mb-3">✅ Tutor berhasil ditambahkan! Berikut info akun login-nya:</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                    <div class="flex items-center justify-between bg-white border border-green-200 rounded-lg px-4 py-3 group">
+                        <div>
+                            <p class="text-xs text-gray-500 font-medium mb-0.5">📧 Email Login</p>
+                            <p class="font-mono font-bold text-gray-900 text-sm" id="copyEmail">{{ $newEmail }}</p>
+                        </div>
+                        <button onclick="copyText('{{ $newEmail }}', this)" title="Salin email"
+                                class="ml-3 text-gray-400 hover:text-primary transition-colors">
+                            <span class="material-symbols-outlined text-[20px]">content_copy</span>
+                        </button>
+                    </div>
+                    <div class="flex items-center justify-between bg-white border border-green-200 rounded-lg px-4 py-3 group">
+                        <div>
+                            <p class="text-xs text-gray-500 font-medium mb-0.5">🔑 Password</p>
+                            <p class="font-mono font-bold text-gray-900 text-sm tracking-widest" id="copyPass">{{ $newPassword }}</p>
+                        </div>
+                        <button onclick="copyText('{{ $newPassword }}', this)" title="Salin password"
+                                class="ml-3 text-gray-400 hover:text-primary transition-colors">
+                            <span class="material-symbols-outlined text-[20px]">content_copy</span>
+                        </button>
+                    </div>
+                </div>
+                <p class="text-xs text-green-700 mt-3">
+                    <span class="material-symbols-outlined text-[14px] align-middle">info</span>
+                    Sampaikan info ini ke tutor. Password dapat diganti setelah login pertama.
+                </p>
+            </div>
+            <button onclick="document.getElementById('accountInfoBox').remove()" class="text-gray-400 hover:text-gray-600">
+                <span class="material-symbols-outlined text-[20px]">close</span>
+            </button>
+        </div>
+    </div>
+@elseif(session('success'))
+    <div class="mb-6 p-4 bg-green-50 border border-green-200 text-green-700 rounded-xl flex items-center gap-2">
+        <span class="material-symbols-outlined text-green-600">check_circle</span>
+        <span class="font-medium text-sm">{{ session('success') }}</span>
+    </div>
+@endif
+
 <!-- Table Container Card -->
 <div class="bg-white rounded-xl shadow-[0_4px_12px_rgba(0,0,0,0.08)] overflow-hidden border border-gray-100">
     <!-- Filters & Search Inner Row -->
@@ -99,3 +151,19 @@
     </div>
 </div>
 @endsection
+
+@push('scripts')
+<script>
+    function copyText(text, btn) {
+        navigator.clipboard.writeText(text).then(() => {
+            const icon = btn.querySelector('.material-symbols-outlined');
+            icon.textContent = 'check';
+            btn.classList.add('text-green-500');
+            setTimeout(() => {
+                icon.textContent = 'content_copy';
+                btn.classList.remove('text-green-500');
+            }, 2000);
+        });
+    }
+</script>
+@endpush

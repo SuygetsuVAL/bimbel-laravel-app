@@ -11,6 +11,9 @@
     <!-- Google Fonts & Material Symbols -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+
+    <!-- NProgress CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.css">
     
     <style>
         body {
@@ -39,6 +42,64 @@
         .custom-scrollbar::-webkit-scrollbar-thumb {
             background: #d1d5db;
             border-radius: 10px;
+        }
+
+        /* ===== PAGE TRANSITION ANIMATIONS ===== */
+        #nprogress .bar {
+            background: #004ac6 !important;
+            height: 3px !important;
+        }
+        #nprogress .peg {
+            box-shadow: 0 0 10px #004ac6, 0 0 5px #004ac6 !important;
+        }
+        #nprogress .spinner-icon {
+            border-top-color: #004ac6 !important;
+            border-left-color: #004ac6 !important;
+        }
+
+        /* Fade + slide-up saat halaman masuk */
+        @keyframes pageEnter {
+            from {
+                opacity: 0;
+                transform: translateY(16px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .page-content {
+            animation: pageEnter 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
+        }
+
+        /* Fade-out saat klik link (keluar halaman) */
+        @keyframes pageFadeOut {
+            from { opacity: 1; transform: translateY(0); }
+            to   { opacity: 0; transform: translateY(-8px); }
+        }
+        .page-leaving {
+            animation: pageFadeOut 0.2s ease-in forwards;
+            pointer-events: none;
+        }
+
+        /* Ripple effect pada link sidebar */
+        .nav-link {
+            position: relative;
+            overflow: hidden;
+        }
+        .ripple {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(0, 74, 198, 0.18);
+            transform: scale(0);
+            animation: rippleAnim 0.55s linear;
+            pointer-events: none;
+        }
+        @keyframes rippleAnim {
+            to {
+                transform: scale(4);
+                opacity: 0;
+            }
         }
     </style>
     
@@ -236,7 +297,7 @@
         </header>
 
         <!-- Dynamic Content Canvas -->
-        <div class="p-8 max-w-[1440px] mx-auto">
+        <div class="p-8 max-w-[1440px] mx-auto page-content">
             <!-- Flash Message Banner -->
             @if(session('success'))
             <div class="mb-6 p-4 bg-green-50 border border-green-200 text-green-700 rounded-xl flex items-center gap-2">
@@ -272,19 +333,72 @@
     </footer>
 </main>
 
-<!-- Interactions Script -->
+<!-- NProgress JS -->
+<script src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js"></script>
+
+<!-- Interactions & Page Transition Script -->
 <script>
-    // Search bar focus interaction
-    const searchInput = document.querySelector('input[placeholder="Cari data, siswa, atau kelas..."]');
-    if (searchInput) {
-        const searchContainer = searchInput.parentElement;
-        searchInput.addEventListener('focus', () => {
-            searchContainer.classList.add('shadow-md');
+    // ===== NPROGRESS CONFIG =====
+    NProgress.configure({ showSpinner: false, speed: 400, minimum: 0.1 });
+
+    // ===== PAGE ENTER ANIMATION =====
+    document.addEventListener('DOMContentLoaded', () => {
+        NProgress.done();
+
+        const pageContent = document.querySelector('.page-content');
+        if (pageContent) {
+            pageContent.style.animationDuration = '0.35s';
+        }
+
+        // ===== LINK CLICK: loading bar + fade-out =====
+        document.querySelectorAll('a[href]').forEach(link => {
+            // Skip link yang buka tab baru, anchor, atau javascript
+            if (
+                link.target === '_blank' ||
+                link.href.startsWith('javascript') ||
+                link.href.includes('#') ||
+                link.getAttribute('href') === '#'
+            ) return;
+
+            // Ripple effect
+            link.classList.add('nav-link');
+            link.addEventListener('click', function(e) {
+                // Ripple
+                const ripple = document.createElement('span');
+                const rect = this.getBoundingClientRect();
+                const size = Math.max(rect.width, rect.height);
+                ripple.className = 'ripple';
+                ripple.style.width  = ripple.style.height = size + 'px';
+                ripple.style.left   = (e.clientX - rect.left - size / 2) + 'px';
+                ripple.style.top    = (e.clientY - rect.top  - size / 2) + 'px';
+                this.appendChild(ripple);
+                setTimeout(() => ripple.remove(), 600);
+
+                // Start NProgress & fade-out page
+                NProgress.start();
+                if (pageContent) pageContent.classList.add('page-leaving');
+            });
         });
-        searchInput.addEventListener('blur', () => {
-            searchContainer.classList.remove('shadow-md');
+
+        // Form submit juga trigger NProgress
+        document.querySelectorAll('form').forEach(form => {
+            form.addEventListener('submit', () => {
+                NProgress.start();
+                if (pageContent) pageContent.classList.add('page-leaving');
+            });
         });
-    }
+
+        // ===== SEARCH BAR INTERACTION =====
+        const searchInput = document.querySelector('input[placeholder="Cari data, siswa, atau kelas..."]');
+        if (searchInput) {
+            const searchContainer = searchInput.parentElement;
+            searchInput.addEventListener('focus', () => searchContainer.classList.add('shadow-md'));
+            searchInput.addEventListener('blur',  () => searchContainer.classList.remove('shadow-md'));
+        }
+    });
+
+    // Trigger NProgress saat halaman mulai dimuat
+    window.addEventListener('beforeunload', () => NProgress.start());
 </script>
 @stack('scripts')
 </body>

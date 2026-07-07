@@ -34,26 +34,48 @@ class TutorController extends Controller
     {
         $request->validate([
             'name'           => 'required|string|max:255',
-            'email'          => 'required|email|unique:users,email',
-            'password'       => 'required|min:6',
             'phone'          => 'nullable|string|max:20',
             'nip'            => 'nullable|unique:tutors,nip',
             'specialization' => 'nullable|string|max:255',
             'education'      => 'nullable|string|max:255',
             'join_date'      => 'nullable|date',
         ], [
-            'name.required'  => 'Nama tutor wajib diisi.',
-            'email.required' => 'Email wajib diisi.',
-            'email.unique'   => 'Email sudah digunakan.',
-            'nip.unique'     => 'NIP sudah terdaftar.',
+            'name.required' => 'Nama tutor wajib diisi.',
+            'nip.unique'    => 'NIP sudah terdaftar.',
         ]);
 
-        DB::transaction(function () use ($request) {
+        // ===== AUTO-GENERATE EMAIL & PASSWORD =====
+        // Ambil kata pertama dari nama (hapus gelar seperti Pak/Buk/Bu/Mr/Ms)
+        $prefixes = ['pak', 'buk', 'bu', 'mr', 'mrs', 'ms', 'dr', 'prof'];
+        $nameParts = preg_split('/\s+/', trim($request->name));
+
+        // Cari kata pertama yang bukan gelar
+        $firstName = strtolower($nameParts[0]);
+        if (in_array($firstName, $prefixes) && isset($nameParts[1])) {
+            $firstName = strtolower($nameParts[1]);
+        }
+
+        // Bersihkan karakter non-alfabet
+        $firstName = preg_replace('/[^a-z0-9]/', '', $firstName);
+
+        // Pastikan email unik (tambahkan angka jika sudah ada)
+        $baseEmail = $firstName . '@aozoralearn.id';
+        $email     = $baseEmail;
+        $counter   = 1;
+        while (User::where('email', $email)->exists()) {
+            $email = $firstName . $counter . '@aozoralearn.id';
+            $counter++;
+        }
+
+        $defaultPassword = 'tutor123';
+        // ==========================================
+
+        DB::transaction(function () use ($request, $email, $defaultPassword) {
             // 1. Buat User
             $user = User::create([
                 'name'      => $request->name,
-                'email'     => $request->email,
-                'password'  => Hash::make($request->password),
+                'email'     => $email,
+                'password'  => Hash::make($defaultPassword),
                 'phone'     => $request->phone,
                 'is_active' => true,
             ]);
@@ -73,7 +95,7 @@ class TutorController extends Controller
         });
 
         return redirect()->route('admin.tutors.index')
-            ->with('success', 'Tutor berhasil ditambahkan.');
+            ->with('success', "Tutor berhasil ditambahkan. Akun login: {$email} / {$defaultPassword}");
     }
 
     public function edit(Tutor $tutor)
