@@ -1,58 +1,256 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+<div align="center">
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+# 📚 AozoraLearn
 
-## About Laravel
+### Sistem Manajemen Bimbingan Belajar Berbasis Web
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+[![Laravel](https://img.shields.io/badge/Laravel-13.x-FF2D20?style=for-the-badge&logo=laravel&logoColor=white)](https://laravel.com)
+[![PHP](https://img.shields.io/badge/PHP-8.3+-777BB4?style=for-the-badge&logo=php&logoColor=white)](https://php.net)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-CDN-06B6D4?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com)
+[![MySQL](https://img.shields.io/badge/MySQL-8.0-4479A1?style=for-the-badge&logo=mysql&logoColor=white)](https://mysql.com)
+[![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)](LICENSE)
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+> **AozoraLearn** adalah aplikasi manajemen bimbingan belajar (*bimbel*) yang dibangun dengan **Laravel 13**. Dirancang untuk mengelola seluruh operasional lembaga bimbel — mulai dari data siswa, jadwal mengajar, presensi, nilai, hingga pembayaran SPP — dalam satu platform terpadu.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+</div>
 
-## Learning Laravel
+---
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## ✨ Fitur Utama
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### 🔐 Autentikasi & Otorisasi
+- Login berbasis **role** (Admin / Tutor)
+- Redirect otomatis ke dashboard sesuai role
+- Manajemen akun aktif/nonaktif
+- Proteksi route via **middleware** per peran
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+### 👑 Portal Admin
+| Modul | Deskripsi |
+|---|---|
+| 📊 **Dashboard** | Statistik real-time: total kelas, siswa aktif, pendapatan bulan ini + Chart.js arus kas |
+| 👨‍🎓 **Manajemen Siswa** | CRUD siswa lengkap dengan data NIS, orang tua, dan kelas |
+| 👨‍🏫 **Manajemen Tutor** | CRUD tutor dengan profil spesialisasi & pengelolaan akun |
+| 🏫 **Manajemen Kelas** | Pengelolaan kelas bimbel — terhubung ke tutor & mata pelajaran |
+| 🗓️ **Jadwal Mengajar** | CRUD jadwal dengan pemilih tanggal & ruangan |
+| 💳 **Pembayaran SPP** | Verifikasi tagihan, buat tagihan baru, filter status bayar |
+| 📊 **Laporan Excel** | Ekspor laporan Presensi, Nilai, dan Keuangan ke format `.xlsx` |
+| 📢 **Notifikasi** | Broadcast pengumuman ke seluruh pengguna sistem |
 
-## Agentic Development
+### 👨‍🏫 Portal Tutor
+| Modul | Deskripsi |
+|---|---|
+| 📅 **Dashboard Tutor** | Jadwal hari ini, rata-rata kehadiran, materi terbaru |
+| ✅ **Input Presensi** | Absensi multi-siswa (Hadir/Sakit/Izin/Alpa) per jadwal |
+| 📁 **Upload Materi** | Upload file PDF, DOCX, MP4 ke server |
+| 📝 **Input Nilai** | Penilaian per kelas dengan AJAX dropdown siswa |
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+---
 
-```bash
-composer require laravel/boost --dev
+## 🛠️ Tech Stack
 
-php artisan boost:install
+| Layer | Teknologi |
+|---|---|
+| **Backend Framework** | [Laravel 13](https://laravel.com) |
+| **PHP Version** | PHP 8.3+ |
+| **Database** | MySQL 8.0 |
+| **Frontend Styling** | Tailwind CSS (via CDN) |
+| **Chart & Visualisasi** | [Chart.js](https://chartjs.org) |
+| **Ekspor Excel** | [PhpSpreadsheet](https://phpspreadsheet.readthedocs.io) |
+| **Role & Permission** | [Spatie Laravel Permission](https://spatie.be/docs/laravel-permission) |
+| **Local Dev Server** | [Laragon](https://laragon.org) |
+
+---
+
+## 📐 Arsitektur Database
+
+```
+users             → Autentikasi + profil (phone, photo, is_active)
+├── tutors        → Profil pengajar (spesialisasi, gaji)
+└── students      → Data siswa (NIS, orang tua, kelas)
+
+subjects          → Mata pelajaran
+classes           → Kelas bimbel (relasi ke tutor & subject)
+schedules         → Jadwal kelas (scope: today())
+attendances       → Rekap kehadiran harian per siswa per jadwal
+materials         → File pelajaran yang diunggah tutor
+grades            → Nilai ujian siswa (accessor: score_percent)
+payments          → Tagihan & verifikasi SPP bulanan
+app_notifications → Broadcast pengumuman ke seluruh pengguna
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+**Relasi Eloquent utama:**
+```
+User         → hasOne(Tutor), hasOne(Student)
+Tutor        → hasMany(ClassRoom), hasMany(Material)
+ClassRoom    → belongsTo(Tutor), belongsTo(Subject), hasMany(Student), hasMany(Schedule)
+Schedule     → hasMany(Attendance), scope: today()
+Student      → hasMany(Attendance), hasMany(Grade), hasMany(Payment)
+```
 
-## Contributing
+---
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+## 🚀 Panduan Instalasi
 
-## Code of Conduct
+### Prasyarat
+- [PHP 8.3+](https://php.net/downloads)
+- [Composer](https://getcomposer.org)
+- [Node.js & NPM](https://nodejs.org)
+- [MySQL 8.0+](https://mysql.com) atau [Laragon](https://laragon.org) *(direkomendasikan)*
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### Langkah Instalasi
 
-## Security Vulnerabilities
+**1. Clone repository**
+```bash
+git clone https://github.com/SuygetsuVAL/bimbel-laravel-app.git
+cd bimbel-laravel-app
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+**2. Install dependensi PHP**
+```bash
+composer install
+```
 
-## License
+**3. Salin & konfigurasi file environment**
+```bash
+cp .env.example .env
+php artisan key:generate
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+**4. Konfigurasi database di `.env`**
+```env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=aozoralearn
+DB_USERNAME=root
+DB_PASSWORD=
+```
+
+**5. Jalankan migrasi & seeder**
+```bash
+php artisan migrate --seed
+```
+
+**6. Buat symlink storage**
+```bash
+php artisan storage:link
+```
+
+**7. Jalankan server lokal**
+```bash
+php artisan serve
+```
+
+Akses aplikasi di: **http://localhost:8000**
+
+> 💡 **Tip Laragon:** Taruh folder project di `C:\laragon\www\` dan akses langsung via `http://aozoralearn.test`.
+
+---
+
+## 🔑 Akun Demo
+
+| Role | Email | Password |
+|---|---|---|
+| 👑 Super Admin | `admin@aozoralearn.id` | `admin123` |
+| 👨‍🏫 Tutor Senior | `rudi@aozoralearn.id` | `tutor123` |
+
+---
+
+## 📁 Struktur Direktori
+
+```
+aozoralearn/
+├── app/
+│   ├── Exports/              # Kelas ekspor Excel (PhpSpreadsheet)
+│   ├── Http/
+│   │   ├── Controllers/
+│   │   │   ├── Admin/        # Controller portal admin
+│   │   │   ├── Auth/         # AuthController (Login, Logout)
+│   │   │   └── Tutor/        # Controller portal tutor
+│   │   └── Middleware/       # AdminMiddleware, TutorMiddleware
+│   └── Models/               # Eloquent Models
+├── database/
+│   ├── migrations/           # Semua migrasi tabel
+│   └── seeders/              # RoleSeeder, DemoDataSeeder
+├── resources/
+│   └── views/
+│       ├── admin/            # View portal admin
+│       ├── auth/             # Halaman login
+│       ├── layouts/          # Layout admin & tutor
+│       └── tutor/            # View portal tutor
+├── routes/
+│   └── web.php               # Definisi semua route
+└── tests/
+    └── Feature/
+        └── AozoraLearnTest.php  # Test suite
+```
+
+---
+
+## 🧪 Testing
+
+```bash
+php artisan test
+```
+
+```
+PASS  Tests\Feature\AozoraLearnTest
+  ✅ test_login_page_renders
+  ✅ test_root_redirects_to_login
+  ✅ test_admin_can_login_and_access_all_modules   (8 assertions)
+  ✅ test_tutor_can_login_and_access_all_modules   (4 assertions)
+
+Tests: 6 passed, Assertions: 20 — Duration: ~2.2s
+```
+
+> Test menggunakan **SQLite in-memory** + `RefreshDatabase` untuk isolasi penuh.
+
+---
+
+## 📋 Catatan Teknis
+
+| Topik | Detail |
+|---|---|
+| **Model Naming** | Menggunakan `ClassRoom` (bukan `Class`) karena `class` adalah *reserved keyword* PHP |
+| **Tailwind CSS** | Via CDN — tidak memerlukan build step `npm run build` |
+| **Storage File** | File materi disimpan di `storage/app/public`, diakses via `Storage::url()` |
+| **Score Percent** | Accessor `score_percent` di model `Grade` = `($score / $max_score) * 100` |
+| **Test Database** | Dikonfigurasi di `phpunit.xml` dengan SQLite in-memory + `$seed = true` |
+| **Tema Warna** | Primary `#004ac6` (biru) untuk Portal Admin & Tutor |
+
+---
+
+## 🗺️ Roadmap
+
+- [ ] 📱 Tampilan responsif mobile-first
+- [ ] 🔔 Notifikasi real-time (WebSocket / Laravel Echo)
+- [ ] 📲 Portal siswa (akses nilai & presensi mandiri)
+- [ ] 📄 Ekspor laporan ke PDF
+- [ ] 🌐 Dukungan multi-cabang bimbel
+- [ ] 🔒 Dua Faktor Autentikasi (2FA)
+
+---
+
+## 🤝 Kontribusi
+
+1. **Fork** repository ini
+2. Buat **branch** fitur baru: `git checkout -b feature/nama-fitur`
+3. **Commit** perubahan: `git commit -m 'feat: tambahkan fitur X'`
+4. **Push** ke branch: `git push origin feature/nama-fitur`
+5. Buat **Pull Request**
+
+---
+
+## 📄 Lisensi
+
+Proyek ini dilisensikan di bawah **MIT License** — lihat file [LICENSE](LICENSE) untuk detail.
+
+---
+
+<div align="center">
+
+Dibuat dengan ❤️ menggunakan **Laravel 13** & **Tailwind CSS**
+
+⭐ **Jangan lupa beri bintang jika proyek ini bermanfaat!** ⭐
+
+</div>
