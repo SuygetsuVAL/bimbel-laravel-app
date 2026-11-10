@@ -1,9 +1,10 @@
 {
     "version": 2,
     "framework": null,
+    "outputDirectory": "public",
     "functions": {
         "api/index.php": {
-            "runtime": "vercel-php@0.7.3"
+            "runtime": "vercel-php@0.9.0"
         }
     },
     "routes": [
@@ -14,6 +15,10 @@
         {
             "src": "/(css|js|images|fonts|favicon.ico|robots.txt)(.*)",
             "dest": "/public/$1$2"
+        },
+        {
+            "src": "/(.*)\\.(css|js|png|jpg|jpeg|gif|svg|ico|woff|woff2|ttf|eot)$",
+            "dest": "/public/$1.$2"
         },
         {
             "src": "/(.*)",
@@ -34,4 +39,3 @@
         "SESSION_DRIVER": "cookie"
     }
 }
-
