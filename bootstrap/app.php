@@ -12,6 +12,9 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
+        // Percayai semua proxy dari Vercel Edge Network
+        $middleware->trustProxies(at: '*');
+
         // Alias middleware untuk route groups
         $middleware->alias([
             'admin' => \App\Http\Middleware\AdminMiddleware::class,
